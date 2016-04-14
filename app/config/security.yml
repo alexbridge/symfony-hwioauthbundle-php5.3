@@ -1,0 +1,30 @@
+security:
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        oauth:
+            id: auth.security.userprovider
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            oauth:
+                resource_owners:
+                    facebook:           "/login/check/facebook"
+                    google:             "/login/check/google"
+                login_path:        /login
+                failure_path:      /login
+                oauth_user_provider:
+                    service: auth.security.userprovider
+            logout: true
+            anonymous: true
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/*, roles: ROLE_USER }

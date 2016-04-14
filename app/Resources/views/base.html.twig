@@ -1,0 +1,66 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+
+<div id="wrapper">
+    <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">{{ 'app.view.layout.menu'|trans }}</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">{{ 'app.sync_manager'|trans }}</a>
+        </div>
+        <div style="color: white;
+    padding: 15px 50px 5px 50px;
+    float: right;
+    font-size: 16px;"> {{ 'app.hello'|trans }}, {{ app.user.username }} &nbsp; <!--<a href="/logout" class="btn btn-danger square-btn-adjust">Logout</a>-->
+        </div>
+    </nav>
+    <!-- /. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li class="text-center">
+                    <!--<img src="/img/find_user.png" class="user-image img-responsive"/>-->
+                    <br>
+                    <i class="fa fa-cloud fa-5x font-white"></i>
+                    <br>
+                </li>
+
+
+                <li>
+                    <a {% if app.request.get('_route') == 'homepage' %} class="active-menu"{% endif %} href="/"><i class="fa fa-dashboard fa-3x"></i> {{ 'app.menu.dashboard'|trans }}</a>
+                </li>
+            </ul>
+
+        </div>
+
+    </nav>
+    <!-- /. NAV SIDE  -->
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+
+                    {% for flashMessage in app.session.flashbag.get('success') %}
+                    <div class="alert alert-success">
+                        {{ flashMessage |raw }}
+                    </div>
+                    {% endfor %}
+
+{% block content %}{% endblock %}
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <hr/>
+
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+
+{% endblock %}

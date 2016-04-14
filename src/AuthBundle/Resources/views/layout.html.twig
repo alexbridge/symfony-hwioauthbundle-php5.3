@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'auth.view.layout.title'|trans }}{% endblock %}
+{% block body %}
+
+
+<div class="container">
+    <div class="row text-center ">
+        <div class="col-md-12">
+            <br/><br/>
+
+            <h2> {{ 'auth.view.layout.login'|trans }}</h2>
+
+            <h5>  </h5>
+            <br/>
+        </div>
+    </div>
+    <div class="row ">
+
+        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>{{ 'auth.view.layout.select_provider'|trans }}</strong>
+                </div>
+                <div class="panel-body">
+
+                    {% block hwi_oauth_content %}
+                    {% endblock hwi_oauth_content %}
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+{% endblock %}

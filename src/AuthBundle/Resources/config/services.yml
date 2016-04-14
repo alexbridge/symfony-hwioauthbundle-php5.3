@@ -1,0 +1,21 @@
+services:
+    auth.security.userprovider:
+        class: AuthBundle\Security\SessionUserProvider
+        arguments: [@event_dispatcher]
+    auth.event_listener.admins:
+        class: AuthBundle\EventListener\AdminsListener
+        arguments: [%auth.admins%]
+        tags:
+            - { name: kernel.event_listener, event: auth.connect.response, method: onAuthConnectResponse }
+    auth.event_listener.persist_user:
+        class: AuthBundle\EventListener\PersistUserListener
+        arguments: [%auth.persist.user%, @?doctrine]
+        tags:
+            - { name: kernel.event_listener, event: auth.connect.response, method: onAuthConnectResponse }
+    auth.event_listener.persist_access_token:
+        class: AuthBundle\EventListener\PersistAccessTokenListener
+        arguments: [%auth.persist.user_access_token%, @?doctrine]
+        tags:
+            - { name: kernel.event_listener, event: auth.connect.response, method: onAuthConnectResponse }
+
+

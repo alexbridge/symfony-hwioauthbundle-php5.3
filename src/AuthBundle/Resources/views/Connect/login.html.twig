@@ -1,0 +1,22 @@
+{% extends 'HWIOAuthBundle::layout.html.twig' %}
+
+{% block hwi_oauth_content %}
+
+{% if error is defined and error %}
+<div class="row">
+    <div class="col-md-12 alert alert-danger text-center">
+        <span class="error">{{ error }}</span>
+    </div>
+</div>
+{% endif %}
+
+{# HWIOAuthBundle integration #}
+<a class="btn btn-primary btn-lg btn-block" href="{{ hwi_oauth_login_url('facebook') }}">
+    <i class="fa fa-facebook" aria-hidden="true"></i> FACEBOOK
+</a>
+
+<a class="btn btn-primary btn-lg btn-block" href="{{ hwi_oauth_login_url('google') }}">
+    <i class="fa fa-google-plus" aria-hidden="true"></i> GOOGLE
+</a>
+
+{% endblock hwi_oauth_content %}
